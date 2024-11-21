@@ -25,21 +25,20 @@ $(document).ready(function() {
     // Function to show license form
     window.showLicenseForm = function () {
         let licenseInfo = JSON.parse(localStorage.getItem('licenseInfo'));
-        $('#licenseeName').val(licenseInfo?.licenseeName || '光云');
-        $('#assigneeName').val(licenseInfo?.assigneeName || '藏柏');
-        $('#expiryDate').val(licenseInfo?.expiryDate || '2111-11-11');
+        $('#licenseeName').val(licenseInfo?.licenseeName || 'username');
+        $('#assigneeName').val(licenseInfo?.assigneeName || 'username');
+        $('#expiryDate').val(licenseInfo?.expiryDate || '2099-12-31');
         $('#mask, #form').show();
     };
 
     // Function to show VM options
     window.showVmoptins = function () {
-        var text = "-javaagent:/(Your Path)/ja-netfilter/ja-netfilter.jar\n" +
+        const text = "-javaagent:/(Your Path)/ja-netfilter/ja-netfilter.jar\n" +
         "--add-opens=java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED\n" +
         "--add-opens=java.base/jdk.internal.org.objectweb.asm.tree=ALL-UNNAMED";
         copyText(text)
-            .then((result) => {
-                alert(result);
-            });
+            .then(() => alert("已复制到剪贴板"))
+            .catch(() => alert("复制失败，请检查网络"));
     };
 
     // Function to copy license
